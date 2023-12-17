@@ -48,18 +48,19 @@ Linux
 
 ### 7. Install the requirements:
 
-Linux/macOS
+Linux/MacOS
 
-`$ virtualenv -p python3 .venv`		
-`$ . .venv/bin/activate`
+`$ python3 -m venv .venv`
+`$ source .venv/bin/activate`
 `(.venv) $ pip install -r requirements.txt`
 
 Windows
 
-`C:\programmingbitcoin> virtualenv -p`		
-`C:\PathToYourPythonInstallation\Python.exe .venv`		
-`C:\programmingbitcoin> .venv\Scripts\activate.bat`		
-`C:\programmingbitcoin> pip install -r requirements.txt`		
+`C:\programmingbitcoin> virtualenv -p`
+`C:\PathToYourPythonInstallation\Python.exe .venv`
+`C:\programmingbitcoin> .venv\Scripts\activate.bat`
+`C:\programmingbitcoin> pip install -r requirements.txt`
+
 ### 8. Run Jupyter Notebook:
 
 `(.venv) $ jupyter notebook`
