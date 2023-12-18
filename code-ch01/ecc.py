@@ -23,7 +23,7 @@ class FieldElement:
 
     def __ne__(self, other):
         # this should be the inverse of the == operator
-        raise NotImplementedError
+        return not (self == other)
 
     # tag::source2[]
     def __add__(self, other):
@@ -38,17 +38,23 @@ class FieldElement:
             raise TypeError('Cannot subtract two numbers in different Fields')
         # self.num and other.num are the actual values
         # self.prime is what we need to mod against
+        num = (self.num - other.num) % self.prime
         # We return an element of the same class
-        raise NotImplementedError
+        return self.__class__(num, self.prime)
 
     def __mul__(self, other):
         if self.prime != other.prime:
             raise TypeError('Cannot multiply two numbers in different Fields')
         # self.num and other.num are the actual values
         # self.prime is what we need to mod against
+        num = (self.num * other.num) % self.prime
         # We return an element of the same class
-        raise NotImplementedError
+        return self.__class__(num, self.prime)
 
+    # The book explains how to modify the __pow__ function to handle negative
+    # exponents. However, support for negative exponent values was added to the
+    # __pow__ function in Python version 3.8, so this is no longer necessary.
+    # https://docs.python.org/3/library/functions.html#pow
     # tag::source3[]
     def __pow__(self, exponent):
         n = exponent % (self.prime - 1)  # <1>
@@ -63,8 +69,9 @@ class FieldElement:
         # self.num**(p-1) % p == 1
         # this means:
         # 1/n == pow(n, p-2, p)
+        num = self.num * pow(other.num, self.prime - 2, self.prime) % self.prime
         # We return an element of the same class
-        raise NotImplementedError
+        return self.__class__(num, self.prime)
 
 
 class FieldElementTest(TestCase):
